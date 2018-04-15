@@ -1,3 +1,5 @@
+language: none
+
 applications:
   - name: msc-blog-consul
     memory: 16M
