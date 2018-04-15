@@ -2,6 +2,7 @@ language: generic
 services:
 - docker
 script:
+- chmod +x consul
 - docker build -t mscblog/consul .
 - docker tag mscblog/consul mscblog/consul
 deploy:
