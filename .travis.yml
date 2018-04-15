@@ -1,3 +1,5 @@
+language: generic
+
 deploy:
   provider: cloudfoundry
   api: https://api.run.pivotal.io
