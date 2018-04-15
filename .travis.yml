@@ -1,13 +1,21 @@
 language: generic
-
+services:
+- docker
+scripts:
+- docker build -t mscblog/consul .
+- docker tag mscblog/consul mscblog/consul
 deploy:
-  provider: cloudfoundry
-  api: https://api.run.pivotal.io
-  username: david.ahern26@gmail.com
-  password:
-    secure: DJicTTF9uvBc2cUXN16yMkrN4+T9nv+kk14zzAI72PU9HkdFWqqrRIZnyQQhppuJUdzDMu7l1wiZx9HL76D0gwjsIyPcO3BTTSMvh7v49T5BP08inARdd2x7gNbR0BXGUQUNwFEhOSq9vXxu5a6vF1V81t82sEib+qUu6SGOAB/IRywb9Zc6bynj3jfwXtRhTdfk9HEBRlcDw+pyHqB0swm1GnHJhifhySebKa3b/lLIpgNXznH/xKNwr5tIdpXt+KHQ/KOLXzFn/eybsnS9quGUEkgAznnV2qKAgvcijxnb4SPSiL+u6/V7qhso/Dhf14+Ww8BbBoNViAgqIkv17Vqiww+s4Ms2jROVWBmt3pNtaGB7+fmxvInl5LkNuDysgswkx9Mequ7mxqbgAO+BPdtqqrxndXz0mLjgpkg1ypQrUz1tyJvwEDQEqClL730xhA9EYrxWQFsLSEnkIIiYYuz82tCixPhbU0IRcF6LzLGXNZaiJ+m0hPndfUhfP8pm28bICyppbeJRwSy+lDXG/plG4gu1C2yRyA0rq9KkbSJhTbsHdJvpXjmHNWYelfjfiyfjWVb1YcGdjMA5RdM88cp1JFWAViGitd3Tt670hMdRkj3Oqy2Y7RtndMWe7Nzk11PVXIZuYUJn8P//F89uWvykCk/78zNr+FzsUj4Qs7E=
-  organization: thor
-  space: dev
-  on:
-    repo: msc-blog-assignment/msc-blog-consul
-    branch: master
+  - provider: cloudfoundry
+    api: https://api.run.pivotal.io
+    username: david.ahern26@gmail.com
+    password:
+      secure: DJicTTF9uvBc2cUXN16yMkrN4+T9nv+kk14zzAI72PU9HkdFWqqrRIZnyQQhppuJUdzDMu7l1wiZx9HL76D0gwjsIyPcO3BTTSMvh7v49T5BP08inARdd2x7gNbR0BXGUQUNwFEhOSq9vXxu5a6vF1V81t82sEib+qUu6SGOAB/IRywb9Zc6bynj3jfwXtRhTdfk9HEBRlcDw+pyHqB0swm1GnHJhifhySebKa3b/lLIpgNXznH/xKNwr5tIdpXt+KHQ/KOLXzFn/eybsnS9quGUEkgAznnV2qKAgvcijxnb4SPSiL+u6/V7qhso/Dhf14+Ww8BbBoNViAgqIkv17Vqiww+s4Ms2jROVWBmt3pNtaGB7+fmxvInl5LkNuDysgswkx9Mequ7mxqbgAO+BPdtqqrxndXz0mLjgpkg1ypQrUz1tyJvwEDQEqClL730xhA9EYrxWQFsLSEnkIIiYYuz82tCixPhbU0IRcF6LzLGXNZaiJ+m0hPndfUhfP8pm28bICyppbeJRwSy+lDXG/plG4gu1C2yRyA0rq9KkbSJhTbsHdJvpXjmHNWYelfjfiyfjWVb1YcGdjMA5RdM88cp1JFWAViGitd3Tt670hMdRkj3Oqy2Y7RtndMWe7Nzk11PVXIZuYUJn8P//F89uWvykCk/78zNr+FzsUj4Qs7E=
+    organization: thor
+    space: dev
+    on:
+      repo: msc-blog-assignment/msc-blog-consul
+      branch: master
+  - provider: script
+    script: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" && docker push mscblog/consul
+    on:
+      branch: master
