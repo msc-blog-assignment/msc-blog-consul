@@ -1,0 +1,6 @@
+applications:
+  - name: msc-blog-consul
+    memory: 16M
+    command: ./consul agent -dev -ui -config-file ./config.json
+    buildpack: binary_buildpack
+    health-check-type: process
