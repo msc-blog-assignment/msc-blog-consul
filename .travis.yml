@@ -1,7 +1,7 @@
 language: generic
 services:
 - docker
-scripts:
+script:
 - docker build -t mscblog/consul .
 - docker tag mscblog/consul mscblog/consul
 deploy:
